@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Fortieth — A celebration in seven movements</title>
+  <meta name="description" content="A curated list of 40th birthday adventures, dinners, and decade-long goals. Sign up to be part of one." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' font-family='serif'%3E40%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="emblem" aria-hidden="true">
+        <span class="emblem-line"></span>
+        <span class="emblem-num">XL</span>
+        <span class="emblem-line"></span>
+      </div>
+      <h1 class="display" id="site-title">A Fortieth</h1>
+      <p class="subtitle" id="site-subtitle">A celebration in seven movements</p>
+      <p class="intro" id="site-intro"></p>
+      <nav class="toc" id="toc" aria-label="Sections"></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="categories"></div>
+
+    <footer class="site-footer">
+      <p class="foot-mark">·</p>
+      <p class="foot-text">With love, and in advance — thank you.</p>
+    </footer>
+  </main>
+
+  <!-- Signup modal -->
+  <div class="modal" id="signup-modal" role="dialog" aria-modal="true" aria-labelledby="signup-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card">
+      <button class="modal-close" data-close aria-label="Close">×</button>
+      <p class="eyebrow">Sign up</p>
+      <h2 class="display modal-title" id="signup-title">—</h2>
+      <p class="modal-note" id="signup-note"></p>
+
+      <form id="signup-form" class="signup-form" novalidate>
+        <label class="field">
+          <span class="field-label">Your name</span>
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
+        <label class="field">
+          <span class="field-label">Email or phone</span>
+          <input type="text" name="contact" required />
+        </label>
+        <label class="field">
+          <span class="field-label">A note (optional)</span>
+          <textarea name="message" rows="3" placeholder="Ideas, dates that work, or just a hello."></textarea>
+        </label>
+        <input type="hidden" name="activity" id="signup-activity" />
+        <input type="hidden" name="category" id="signup-category" />
+
+        <div class="form-actions">
+          <button type="button" class="btn-ghost" data-close>Cancel</button>
+          <button type="submit" class="btn-primary" id="signup-submit">Send signup</button>
+        </div>
+        <p class="form-status" id="form-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Thank you toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <span>Thank you. Message sent.</span>
+  </div>
+
+  <!-- Admin bar (hidden unless ?admin) -->
+  <div class="admin-bar" id="admin-bar" hidden>
+    <div class="admin-inner">
+      <span class="admin-tag">Owner mode</span>
+      <span class="admin-hint">Click any status chip to cycle: Open → Claimed → Done.</span>
+      <button class="btn-ghost" id="admin-export">Export data.json</button>
+      <button class="btn-ghost" id="admin-exit">Exit</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

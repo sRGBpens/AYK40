@@ -1,0 +1,107 @@
+{
+  "title": "A Fortieth",
+  "subtitle": "A celebration in seven movements",
+  "intro": "Forty feels worth marking. Below is a living list of things I'd love to do — alone, together, or with you in particular. If something catches your eye, sign up and let me take it from there.",
+  "categories": [
+    {
+      "id": "adventures",
+      "title": "Adventures",
+      "epigraph": "Bad Bunny — \u201cMonaco\u201d",
+      "items": [
+        { "id": "adv-1", "title": "Skydiving", "status": "open" },
+        { "id": "adv-2", "title": "Take dance classes to learn to move smoothly with a partner", "status": "open" },
+        { "id": "adv-3", "title": "Hike/camp with friends in the Sierras", "status": "open" },
+        { "id": "adv-4", "title": "Hike/camp with friends in the local mountains", "status": "open" },
+        { "id": "adv-5", "title": "Hike/camp with friends at the beach", "status": "open" },
+        { "id": "adv-6", "title": "Hike/camp with friends in the snow", "status": "open" },
+        { "id": "adv-7", "title": "A weekend in Chicago or Miami", "notes": "Help me pick — or come along.", "status": "open" },
+        { "id": "adv-8", "title": "Learn how to make jewelry", "status": "open" }
+      ]
+    },
+    {
+      "id": "un-luddite",
+      "title": "Un-Luddite-ing",
+      "epigraph": "Janelle Mon\u00e1e",
+      "items": [
+        { "id": "lud-1", "title": "Take a Waymo", "status": "open" },
+        { "id": "lud-2", "title": "Use AI to build something cool", "status": "open" },
+        { "id": "lud-3", "title": "Tap to pay", "status": "completed" },
+        { "id": "lud-4", "title": "3D print something for keeps", "status": "open" }
+      ]
+    },
+    {
+      "id": "dining",
+      "title": "Dining",
+      "epigraph": "Polo & Pan",
+      "items": [
+        {
+          "id": "din-1",
+          "title": "A Michelin meal with substantive vegetarian protein",
+          "notes": "Options on the table: Cobi's (Santa Monica, Bib Gourmand) \u00b7 Ardor (WeHo) \u00b7 Rasa Rumah / Medu (East Hollywood, Bib Gourmand) \u00b7 Killer Noodle (Sawtelle) \u00b7 Destroyer (Culver). Perle (Pasadena) previously considered.",
+          "status": "open"
+        },
+        {
+          "id": "din-2",
+          "title": "Host a 40th birthday party",
+          "notes": "Inviting everyone who matters, on a day they're actually available.",
+          "status": "open"
+        },
+        {
+          "id": "din-3",
+          "title": "Find or make an excellent black forest birthday cake",
+          "notes": "Leads: Taste of Beauty (vegan tasting menu), Bistro Na, Awan, Kansha, Hisaya Chestnuts.",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "entertainment",
+      "title": "Entertainment",
+      "epigraph": "\u201cHeya\u201d",
+      "items": [
+        { "id": "ent-1", "title": "See Alonzo Bodden or Usama Siddiquee live", "status": "open" },
+        { "id": "ent-2", "title": "Watch Palm Springs (2020), Peggy Sue Got Married, and more", "status": "open" },
+        { "id": "ent-3", "title": "An excellent vegetarian afternoon tea", "status": "open" },
+        { "id": "ent-4", "title": "A Huntington Gardens & Library membership", "status": "open" },
+        { "id": "ent-5", "title": "Volunteer as a family", "status": "open" }
+      ]
+    },
+    {
+      "id": "big-moves",
+      "title": "Big Life Moves",
+      "epigraph": "Kali Uchis",
+      "items": [
+        { "id": "big-1", "title": "Move back to LA", "status": "open" },
+        { "id": "big-2", "title": "Love, nurture, and grow my family", "status": "open" }
+      ]
+    },
+    {
+      "id": "mental-space",
+      "title": "Mental Space Gifts",
+      "epigraph": "\u201cHow It\u2019s Done\u201d",
+      "items": [
+        { "id": "men-1", "title": "Treat myself: Invisalign", "status": "completed" },
+        { "id": "men-2", "title": "Treat myself: dental implants", "status": "open" },
+        { "id": "men-3", "title": "One more fancy-gift idea (open to suggestions)", "status": "open" },
+        { "id": "men-4", "title": "Gift Ava a Disneyland day", "status": "completed" },
+        { "id": "men-5", "title": "Donate to a non-profit that's earned it", "notes": "Currently weighing EWG and KPCC.", "status": "open" },
+        { "id": "men-6", "title": "A gratitude journal with a weekly quote on gratitude and abundance", "status": "open" }
+      ]
+    },
+    {
+      "id": "decade-goals",
+      "title": "Goals for the Next Decade",
+      "epigraph": "\u201cGolden\u201d",
+      "items": [
+        { "id": "dec-1", "title": "Hike Patagonia \u2014 both sides", "status": "open" },
+        { "id": "dec-2", "title": "Travel the seven continents again", "notes": "A Scandinavian trip, or the European Christmas markets?", "status": "open" },
+        { "id": "dec-3", "title": "Center the wellness of myself \u2014 mind, body, energy", "status": "open" },
+        { "id": "dec-4", "title": "Center the wellness of my family \u2014 mind, body, energy", "status": "open" },
+        { "id": "dec-5", "title": "Grow my career", "status": "open" },
+        { "id": "dec-6", "title": "Keep our financial goals on track", "status": "open" },
+        { "id": "dec-7", "title": "Minimize for contentment, peace, and bandwidth to focus", "status": "open" },
+        { "id": "dec-8", "title": "Be in a play or musical", "status": "open" }
+      ]
+    }
+  ]
+}
