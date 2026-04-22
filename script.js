@@ -82,6 +82,11 @@ function renderAll() {
     btn.addEventListener("click", onSignupClick);
   });
 
+  // Wire play buttons
+  wrap.querySelectorAll(".play-btn").forEach(btn => {
+    btn.addEventListener("click", onPlayClick);
+  });
+
   // Wire admin chip toggles
   if (state.isAdmin) {
     wrap.querySelectorAll(".chip").forEach(chip => {
@@ -93,16 +98,52 @@ function renderAll() {
 function renderCategory(cat, idx) {
   const num = ROMAN[idx] || (idx + 1);
   const items = cat.items.map((it, i) => renderItem(cat, it, i)).join("");
+  const music = renderMusic(cat);
   return `
     <section class="category" id="${cat.id}" aria-labelledby="${cat.id}-title">
       <header class="cat-head">
         <p class="cat-num">${num}</p>
         <h2 class="cat-title" id="${cat.id}-title">${escapeHtml(cat.title)}</h2>
-        <p class="cat-epigraph">${escapeHtml(cat.epigraph || "")}</p>
+        <p class="cat-epigraph">
+          ${escapeHtml(cat.epigraph || "")}
+          ${music.button}
+        </p>
+        ${music.panel}
       </header>
       <ol class="items">${items}</ol>
     </section>
   `;
+}
+
+function renderMusic(cat) {
+  const m = cat.music;
+  if (!m || !m.spotifyId) return { button: "", panel: "" };
+  const id = extractSpotifyId(m.spotifyId);
+  const label = `Play ${m.song || "track"}${m.artist ? " by " + m.artist : ""}`;
+  const button = `
+    <button class="play-btn" type="button"
+      data-music-for="${cat.id}"
+      data-track="${escapeHtml(id)}"
+      aria-label="${escapeHtml(label)}"
+      aria-expanded="false"
+      aria-controls="player-${cat.id}"
+      title="${escapeHtml(label)}">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><polygon points="6,4 6,16 16,10" /></svg>
+    </button>
+  `;
+  const panel = `
+    <div class="player-panel" id="player-${cat.id}" data-panel-for="${cat.id}" hidden></div>
+  `;
+  return { button, panel };
+}
+
+/**
+ * Accept a Spotify track URL, embed URL, or bare ID and return the bare ID.
+ */
+function extractSpotifyId(input) {
+  if (!input) return "";
+  const m = String(input).match(/track\/([a-zA-Z0-9]+)/);
+  return m ? m[1] : String(input).trim();
 }
 
 function renderItem(cat, item, i) {
@@ -137,6 +178,45 @@ function renderItem(cat, item, i) {
       </div>
     </li>
   `;
+}
+
+// -------- Music playback --------
+function onPlayClick(e) {
+  const btn = e.currentTarget;
+  const catId = btn.dataset.musicFor;
+  const trackId = btn.dataset.track;
+  const panel = document.querySelector(`[data-panel-for="${catId}"]`);
+  if (!panel) return;
+
+  const isOpen = !panel.hidden;
+
+  // Close every player first (only one at a time so we don't stack audio)
+  closeAllPlayers();
+
+  if (!isOpen) {
+    // Lazy-load the iframe on first open; swap to null/back when closing
+    panel.innerHTML = `
+      <iframe
+        src="https://open.spotify.com/embed/track/${encodeURIComponent(trackId)}?utm_source=generator"
+        width="100%" height="152" frameborder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"></iframe>
+    `;
+    panel.hidden = false;
+    btn.setAttribute("aria-expanded", "true");
+    btn.classList.add("is-playing");
+  }
+}
+
+function closeAllPlayers() {
+  document.querySelectorAll(".player-panel").forEach(p => {
+    p.hidden = true;
+    p.innerHTML = ""; // stop audio by removing the iframe
+  });
+  document.querySelectorAll(".play-btn").forEach(b => {
+    b.setAttribute("aria-expanded", "false");
+    b.classList.remove("is-playing");
+  });
 }
 
 // -------- Signup flow --------

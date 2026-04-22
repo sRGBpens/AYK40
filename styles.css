@@ -211,6 +211,76 @@ main {
   font-size: 0.95rem;
   color: var(--ink-50);
   margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* Music player */
+.play-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  padding: 0;
+  transition: all 220ms cubic-bezier(.2,.7,.2,1);
+  flex-shrink: 0;
+}
+.play-btn svg {
+  width: 0.7rem;
+  height: 0.7rem;
+  fill: currentColor;
+  transition: transform 200ms ease;
+  margin-left: 1px; /* optical centering of triangle */
+}
+.play-btn:hover {
+  background: var(--gold);
+  color: var(--paper);
+  transform: scale(1.08);
+}
+.play-btn.is-playing {
+  background: var(--wine);
+  color: var(--paper);
+  border-color: var(--wine);
+}
+.play-btn.is-playing svg {
+  /* Swap triangle to pause bars via mask when playing */
+  content: none;
+}
+.play-btn.is-playing svg polygon { display: none; }
+.play-btn.is-playing::before {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 0.65rem;
+  background: currentColor;
+  box-shadow: 6px 0 0 currentColor;
+  margin-left: -3px;
+}
+
+.player-panel {
+  margin-top: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -12px rgba(26, 22, 19, 0.25);
+  animation: player-in 260ms cubic-bezier(.2,.7,.2,1);
+}
+.player-panel[hidden] { display: none; }
+.player-panel iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+}
+@keyframes player-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* -------------------- Items -------------------- */

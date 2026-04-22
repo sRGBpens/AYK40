@@ -120,7 +120,62 @@ Commit the file to GitHub and the site updates within a minute.
 
 ---
 
-## 7. Tweaking the look
+## 7. Music (Spotify)
+
+Every category has a small gold play button next to its epigraph.
+Clicking it expands an inline Spotify player below the category header.
+Only one plays at a time — opening a new one closes the previous.
+
+### Currently wired up
+
+| Section | Song | Artist |
+| --- | --- | --- |
+| Adventures | Monaco | Bad Bunny |
+| Un-Luddite-ing | Make Me Feel | Janelle Monáe |
+| Dining | Canopée | Polo & Pan |
+| Entertainment | HEYA | IVE |
+| Big Life Moves | telepatía | Kali Uchis |
+| Mental Space Gifts | How It's Done | HUNTR/X |
+| Goals for the Next Decade | Golden | HUNTR/X |
+
+> **Note on the artist-only references.** Your original list gave some artists
+> without a song (Janelle Monáe, Polo & Pan, Kali Uchis). I picked each
+> artist's best-known track as a sensible default. For "Heya" and "How It's
+> Done" I went with the popular K-pop tracks of those names (IVE and HUNTR/X
+> respectively) — swap any of these for the version you actually meant.
+
+### Swapping in a different track
+
+1. On Spotify (web or app), find the track you want, hit **Share → Copy Song Link**.
+   You'll get something like `https://open.spotify.com/track/4MjDJD8cW7iVeWInc2Bdyj?si=…`
+2. In `data.json`, find the category's `music` object and paste the track ID
+   (the chunk after `/track/`, before `?`) into `spotifyId`:
+
+```json
+"music": {
+  "spotifyId": "4MjDJD8cW7iVeWInc2Bdyj",
+  "song": "Monaco",
+  "artist": "Bad Bunny"
+}
+```
+
+The `song` and `artist` fields are used only for the hover tooltip
+(e.g. *Play Monaco by Bad Bunny*), so set them to whatever's accurate.
+
+### Removing music from a category
+
+Delete the whole `music` object from that category in `data.json`.
+The play button simply won't render.
+
+### How the player works for visitors
+- Clicking play loads the official Spotify embed — no API key, no auth.
+- Visitors **without** a Spotify account hear a 30-second preview.
+- Visitors **signed in** to Spotify (in the same browser) hear the full song.
+- Audio never autoplays. It requires a click, always.
+
+---
+
+## 8. Tweaking the look
 
 All design tokens live at the top of `styles.css`:
 
@@ -136,7 +191,7 @@ Change those four and the whole site shifts tastefully. Fonts are
 
 ---
 
-## 8. Testing locally
+## 9. Testing locally
 
 Because `script.js` uses `fetch("data.json")`, you need to serve the
 folder over http (not open the file directly). Easiest:

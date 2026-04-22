@@ -7,6 +7,7 @@
       "id": "adventures",
       "title": "Adventures",
       "epigraph": "Bad Bunny — \u201cMonaco\u201d",
+      "music": { "spotifyId": "4MjDJD8cW7iVeWInc2Bdyj", "song": "Monaco", "artist": "Bad Bunny" },
       "items": [
         { "id": "adv-1", "title": "Skydiving", "status": "open" },
         { "id": "adv-2", "title": "Take dance classes to learn to move smoothly with a partner", "status": "open" },
@@ -22,6 +23,7 @@
       "id": "un-luddite",
       "title": "Un-Luddite-ing",
       "epigraph": "Janelle Mon\u00e1e",
+      "music": { "spotifyId": "5gW5dSy3vXJxgzma4rQuzH", "song": "Make Me Feel", "artist": "Janelle Mon\u00e1e" },
       "items": [
         { "id": "lud-1", "title": "Take a Waymo", "status": "open" },
         { "id": "lud-2", "title": "Use AI to build something cool", "status": "open" },
@@ -33,6 +35,7 @@
       "id": "dining",
       "title": "Dining",
       "epigraph": "Polo & Pan",
+      "music": { "spotifyId": "3RZrw2VsOf2vg3d6pYldVv", "song": "Canop\u00e9e", "artist": "Polo & Pan" },
       "items": [
         {
           "id": "din-1",
@@ -58,6 +61,7 @@
       "id": "entertainment",
       "title": "Entertainment",
       "epigraph": "\u201cHeya\u201d",
+      "music": { "spotifyId": "1jXkl4Jv3iiX0Maj77witN", "song": "HEYA", "artist": "IVE" },
       "items": [
         { "id": "ent-1", "title": "See Alonzo Bodden or Usama Siddiquee live", "status": "open" },
         { "id": "ent-2", "title": "Watch Palm Springs (2020), Peggy Sue Got Married, and more", "status": "open" },
@@ -70,6 +74,7 @@
       "id": "big-moves",
       "title": "Big Life Moves",
       "epigraph": "Kali Uchis",
+      "music": { "spotifyId": "6tDDoYIxWvMLTdKpjFkc1B", "song": "telepat\u00eda", "artist": "Kali Uchis" },
       "items": [
         { "id": "big-1", "title": "Move back to LA", "status": "open" },
         { "id": "big-2", "title": "Love, nurture, and grow my family", "status": "open" }
@@ -79,6 +84,7 @@
       "id": "mental-space",
       "title": "Mental Space Gifts",
       "epigraph": "\u201cHow It\u2019s Done\u201d",
+      "music": { "spotifyId": "3RXUgPNIbUgFxsDWuBQEt6", "song": "How It\u2019s Done", "artist": "HUNTR/X" },
       "items": [
         { "id": "men-1", "title": "Treat myself: Invisalign", "status": "completed" },
         { "id": "men-2", "title": "Treat myself: dental implants", "status": "open" },
@@ -92,6 +98,7 @@
       "id": "decade-goals",
       "title": "Goals for the Next Decade",
       "epigraph": "\u201cGolden\u201d",
+      "music": { "spotifyId": "1CPZ5BxNNd0n0nF4Orb9JS", "song": "Golden", "artist": "HUNTR/X" },
       "items": [
         { "id": "dec-1", "title": "Hike Patagonia \u2014 both sides", "status": "open" },
         { "id": "dec-2", "title": "Travel the seven continents again", "notes": "A Scandinavian trip, or the European Christmas markets?", "status": "open" },
