@@ -226,9 +226,21 @@ function openAndPlay(btn, panel, trackId) {
 
   SpotifyAPI.createController(
     mount,
-    { uri: `spotify:track:${trackId}`, width: "100%", height: 80 },
+    { uri: `spotify:track:${trackId}`, width: "100%", height: 152 },
     (controller) => {
       panel._spotifyController = controller;
+
+      // Spotify creates its own iframe inside `mount`. Disable its
+      // scrollbars explicitly — Spotify's embed occasionally renders
+      // just past its stated height on wider viewports, which would
+      // otherwise show a scrollbar.
+      const iframe = panel.querySelector("iframe");
+      if (iframe) {
+        iframe.setAttribute("scrolling", "no");
+        iframe.style.display = "block";
+        iframe.style.border = "0";
+      }
+
       // 'ready' fires once the embed can accept playback commands.
       // Calling play() then works because the user-gesture chain is
       // still valid from the original button click.

@@ -257,13 +257,15 @@ main {
   animation: player-in 260ms cubic-bezier(.2,.7,.2,1);
   /* Let the Spotify embed render flush — no frame, no scrollbars */
   overflow: hidden;
+  line-height: 0; /* prevents an inline-block iframe from adding stray descender space */
 }
 .player-panel[hidden] { display: none; }
 .player-panel iframe {
   display: block;
-  width: 100%;
-  border: 0;
+  width: 100% !important;
+  border: 0 !important;
   border-radius: 12px; /* matches Spotify's own rounding */
+  overflow: hidden;
 }
 @keyframes player-in {
   from { opacity: 0; transform: translateY(-4px); }
