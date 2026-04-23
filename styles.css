@@ -233,12 +233,12 @@ main {
   flex-shrink: 0;
 }
 .play-btn svg {
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 0.8rem;
+  height: 0.8rem;
   fill: currentColor;
-  transition: transform 200ms ease;
-  margin-left: 1px; /* optical centering of triangle */
+  display: block;
 }
+.play-btn .icon-pause { display: none; }
 .play-btn:hover {
   background: var(--gold);
   color: var(--paper);
@@ -249,34 +249,21 @@ main {
   color: var(--paper);
   border-color: var(--wine);
 }
-.play-btn.is-playing svg {
-  /* Swap triangle to pause bars via mask when playing */
-  content: none;
-}
-.play-btn.is-playing svg polygon { display: none; }
-.play-btn.is-playing::before {
-  content: "";
-  display: block;
-  width: 3px;
-  height: 0.65rem;
-  background: currentColor;
-  box-shadow: 6px 0 0 currentColor;
-  margin-left: -3px;
-}
+.play-btn.is-playing .icon-play  { display: none; }
+.play-btn.is-playing .icon-pause { display: block; }
 
 .player-panel {
   margin-top: 1rem;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px -12px rgba(26, 22, 19, 0.25);
   animation: player-in 260ms cubic-bezier(.2,.7,.2,1);
+  /* Let the Spotify embed render flush — no frame, no scrollbars */
+  overflow: hidden;
 }
 .player-panel[hidden] { display: none; }
 .player-panel iframe {
   display: block;
   width: 100%;
-  border: none;
-  border-radius: 12px;
+  border: 0;
+  border-radius: 12px; /* matches Spotify's own rounding */
 }
 @keyframes player-in {
   from { opacity: 0; transform: translateY(-4px); }

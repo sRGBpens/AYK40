@@ -128,7 +128,8 @@ function renderMusic(cat) {
       aria-expanded="false"
       aria-controls="player-${cat.id}"
       title="${escapeHtml(label)}">
-      <svg viewBox="0 0 20 20" aria-hidden="true"><polygon points="6,4 6,16 16,10" /></svg>
+      <svg class="icon-play" viewBox="0 0 20 20" aria-hidden="true"><polygon points="7,4.5 7,15.5 16,10" /></svg>
+      <svg class="icon-pause" viewBox="0 0 20 20" aria-hidden="true"><rect x="6" y="5" width="2.5" height="10" rx="0.5" /><rect x="11.5" y="5" width="2.5" height="10" rx="0.5" /></svg>
     </button>
   `;
   const panel = `
@@ -180,7 +181,18 @@ function renderItem(cat, item, i) {
   `;
 }
 
-// -------- Music playback --------
+// -------- Music playback (Spotify iframe API) --------
+// The API is loaded asynchronously via <script async> in index.html.
+// When it's ready, Spotify calls window.onSpotifyIframeApiReady.
+let SpotifyAPI = null;
+const pendingPlayActions = [];
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  SpotifyAPI = IFrameAPI;
+  // Run anything that was queued before the API was ready
+  while (pendingPlayActions.length) pendingPlayActions.shift()();
+};
+
 function onPlayClick(e) {
   const btn = e.currentTarget;
   const catId = btn.dataset.musicFor;
@@ -190,28 +202,62 @@ function onPlayClick(e) {
 
   const isOpen = !panel.hidden;
 
-  // Close every player first (only one at a time so we don't stack audio)
+  // Always close every player first (keeps only one playing at a time,
+  // and destroys any prior controller so its audio actually stops).
   closeAllPlayers();
 
-  if (!isOpen) {
-    // Lazy-load the iframe on first open; swap to null/back when closing
-    panel.innerHTML = `
-      <iframe
-        src="https://open.spotify.com/embed/track/${encodeURIComponent(trackId)}?utm_source=generator"
-        width="100%" height="152" frameborder="0" allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"></iframe>
-    `;
-    panel.hidden = false;
-    btn.setAttribute("aria-expanded", "true");
-    btn.classList.add("is-playing");
-  }
+  if (isOpen) return; // was open → we just closed it
+
+  // Open + autoplay. Queue if the Spotify API hasn't loaded yet.
+  const startPlayback = () => openAndPlay(btn, panel, trackId);
+  if (SpotifyAPI) startPlayback();
+  else pendingPlayActions.push(startPlayback);
+}
+
+function openAndPlay(btn, panel, trackId) {
+  // Spotify replaces the element we pass in with its own iframe, so we
+  // create a fresh placeholder div for it on every open.
+  panel.innerHTML = "";
+  const mount = document.createElement("div");
+  panel.appendChild(mount);
+  panel.hidden = false;
+  btn.setAttribute("aria-expanded", "true");
+  btn.classList.add("is-playing");
+
+  SpotifyAPI.createController(
+    mount,
+    { uri: `spotify:track:${trackId}`, width: "100%", height: 80 },
+    (controller) => {
+      panel._spotifyController = controller;
+      // 'ready' fires once the embed can accept playback commands.
+      // Calling play() then works because the user-gesture chain is
+      // still valid from the original button click.
+      const playWhenReady = () => {
+        try { controller.play(); } catch (err) { /* embed will still be visible */ }
+      };
+      controller.addListener("ready", playWhenReady);
+      // Some embeds don't emit 'ready' — try after a small grace window too
+      setTimeout(playWhenReady, 800);
+
+      // Keep our button in sync if the user pauses from inside the embed
+      controller.addListener("playback_update", (e) => {
+        const data = e && e.data;
+        if (!data) return;
+        if (data.isPaused) btn.classList.remove("is-playing");
+        else btn.classList.add("is-playing");
+      });
+    }
+  );
 }
 
 function closeAllPlayers() {
   document.querySelectorAll(".player-panel").forEach(p => {
+    if (p._spotifyController) {
+      try { p._spotifyController.destroy(); } catch (_) {}
+      p._spotifyController = null;
+    }
     p.hidden = true;
-    p.innerHTML = ""; // stop audio by removing the iframe
+    p.innerHTML = "";
   });
   document.querySelectorAll(".play-btn").forEach(b => {
     b.setAttribute("aria-expanded", "false");
